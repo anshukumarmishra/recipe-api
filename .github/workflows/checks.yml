@@ -1,8 +1,7 @@
----
 name: Checks
- 
+
 on: [push]
- 
+
 jobs:
   test-lint:
     name: Test and Lint
@@ -15,6 +14,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Test
         run: docker compose run --rm app sh -c "python manage.py test"
       - name: Lint
